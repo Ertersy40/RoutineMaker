@@ -1,0 +1,264 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.schedule-wrapper {
+    width: 80%;
+    max-width: 798px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    height: 600px; /* Adjust as needed */
+    position: relative;
+}
+
+.schedule-container {
+    display: flex;
+    overflow-x: auto;
+    position: relative;
+}
+
+.time-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 80px;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: white;
+}
+
+.time-slot {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    height: 50px;
+}
+
+.time-slot.empty {
+    position: sticky;
+    top: 0;
+    background-color: #f4f4f4;
+    z-index: 3;
+}
+
+.day-column {
+    position: relative; /* Added for absolute positioning */
+    display: grid;
+    grid-template-rows: 50px repeat(auto-fill, 50px); /* First row for the header */
+    min-width: 100px;
+}
+
+.day-header {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #ccc;
+    height: 50px;
+    line-height: 50px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    grid-row: 1; /* Place header in first row */
+}
+
+.day-slot {
+    border: 1px solid #eee;
+    height: 50px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.day-slot:hover {
+    background-color: rgba(0, 0, 255, 0.1);
+}
+
+.day-slot.selected {
+    background-color: rgba(0, 0, 255, 0.2);
+}
+
+.day-header {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #ccc;
+    height: 50px;
+    line-height: 50px;
+}
+
+.modal {
+    z-index: 100;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    width: 400px;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.activity-block {
+    position: absolute; /* Absolute positioning */
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.activity-block:hover {
+    cursor: pointer;
+}
+
+.current-time-outline {
+    border: 2px solid red;
+    box-sizing: border-box;
+}
+
+.todo-item {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.todo-item .completed {
+    text-decoration: line-through;
+    color: gray;
+    margin-left: 8px;
+}
+
+.todo-item input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+
+@media (max-width: 600px) {
+    .schedule-wrapper {
+        width: 100%;
+    }
+    .schedule-container {
+        flex-direction: column;
+    }
+    .day-column, .time-column {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    .day-slot, .time-slot {
+        min-width: 80px;
+        height: 50px;
+    }
+}
+
+
+/* Styles for the activity settings form */
+#activity-settings {
+    margin-top: 20px;
+}
+
+#activity-settings h3 {
+    margin-bottom: 10px;
+}
+
+#activity-settings form label {
+    display: block;
+    margin-top: 10px;
+}
+
+#activity-settings form input[type="text"],
+#activity-settings form input[type="time"],
+#activity-settings form textarea,
+#activity-settings form select {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#activity-settings form button {
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+/* Styles for editable text */
+.editable-text {
+    cursor: pointer;
+}
+
+.editable-text:hover {
+    text-decoration: underline;
+}
+
+.editable-text[contenteditable="true"] {
+    border: 1px dashed #ccc;
+    padding: 2px;
+}
+
+
+/* Styles for the settings toggle button */
+.settings-toggle-button {
+    background-color: #f4f4f4;
+    border: none;
+    color: #333;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-toggle-button:hover {
+    background-color: #ddd;
+}
+
+/* Styles for the collapsible settings section */
+.collapsible-section {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+
+.collapsible-section.open {
+    max-height: 500px; /* Adjust as needed */
+    transition: max-height 0.3s ease-in;
+}
+
+/* Adjustments for elements inside the collapsible section */
+.collapsible-section form label,
+.collapsible-section form input,
+.collapsible-section form select,
+.collapsible-section form button {
+    margin-top: 10px;
+}
