@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize existing activities
     function populateExistingActivities() {
+        console.log("populating existing activities")
         existingActivitiesSelect.innerHTML = '<option value="">--Select--</option>';
         for (let key in activities) {
             let option = document.createElement('option');
@@ -77,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             existingActivitiesSelect.appendChild(option);
         }
     }
+
     populateExistingActivities();
 
     // Save activities and schedule to localStorage
@@ -352,8 +354,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const activity = activities[activityId];
 
         // Close the settings section by default when opening the dialog
-        // activitySettingsSection.classList.remove('open');
-        // settingsToggleButton.innerHTML = 'Settings &#9660;'; // Reset to default state
+        activitySettingsSection.classList.remove('open');
+        settingsToggleButton.innerHTML = 'Settings &#9660;'; // Reset to default state
         // Update the dialog title and description
         const notesDialogTitle = document.getElementById('notes-dialog-title');
         const notesDialogDescription = document.getElementById('notes-dialog-description');
@@ -408,22 +410,22 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
-    // // Reference to the settings toggle button and settings section
-    // const settingsToggleButton = document.getElementById('settings-toggle-button');
-    // const activitySettingsSection = document.getElementById('activity-settings');
+    // Reference to the settings toggle button and settings section
+    const settingsToggleButton = document.getElementById('settings-toggle-button');
+    const activitySettingsSection = document.getElementById('activity-settings');
 
-    // // Add event listener to the settings toggle button
-    // settingsToggleButton.addEventListener('click', function() {
-    //     if (activitySettingsSection.classList.contains('open')) {
-    //         // Collapse the settings section
-    //         activitySettingsSection.classList.remove('open');
-    //         settingsToggleButton.innerHTML = 'Settings &#9660;'; // Down arrow
-    //     } else {
-    //         // Expand the settings section
-    //         activitySettingsSection.classList.add('open');
-    //         settingsToggleButton.innerHTML = 'Settings &#9650;'; // Up arrow
-    //     }
-    // });
+    // Add event listener to the settings toggle button
+    settingsToggleButton.addEventListener('click', function() {
+        if (activitySettingsSection.classList.contains('open')) {
+            // Collapse the settings section
+            activitySettingsSection.classList.remove('open');
+            settingsToggleButton.innerHTML = 'Settings &#9660;'; // Down arrow
+        } else {
+            // Expand the settings section
+            activitySettingsSection.classList.add('open');
+            settingsToggleButton.innerHTML = 'Settings &#9650;'; // Up arrow
+        }
+    });
 
     function makeTextEditable(element, field) {
         element.addEventListener('click', function() {
@@ -509,25 +511,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     let startHourIndex = startHour - startTime;
                     let totalSlots = endHour - startHour + 1;
+                    if (activities[activityId]) {
 
-                    let activityBlock = document.createElement('div');
-                    activityBlock.className = 'activity-block';
-                    activityBlock.style.backgroundColor = activities[activityId].color;
-                    activityBlock.textContent = activities[activityId].title;
-
-                    // Position the activity block absolutely
-                    activityBlock.style.position = 'absolute';
-                    activityBlock.style.left = '0';
-                    activityBlock.style.width = '100%';
-                    activityBlock.style.zIndex = '1';
-                    activityBlock.style.top = `${headerHeight + (startHourIndex * slotHeight)}px`;
-                    activityBlock.style.height = `${totalSlots * slotHeight}px`;
-
-                    activityBlock.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        openNotesDialog(activityId);
-                    });
-                    dayColumn.appendChild(activityBlock);
+                        let activityBlock = document.createElement('div');
+                        activityBlock.className = 'activity-block';
+                        activityBlock.style.backgroundColor = activities[activityId].color;
+                        activityBlock.textContent = activities[activityId].title;
+                        
+                        // Position the activity block absolutely
+                        activityBlock.style.position = 'absolute';
+                        activityBlock.style.left = '0';
+                        activityBlock.style.width = '100%';
+                        activityBlock.style.zIndex = '1';
+                        activityBlock.style.top = `${headerHeight + (startHourIndex * slotHeight)}px`;
+                        activityBlock.style.height = `${totalSlots * slotHeight}px`;
+                        
+                        activityBlock.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            openNotesDialog(activityId);
+                        });
+                        dayColumn.appendChild(activityBlock);
+                    } else {
+                        console.log("Adding activity failed!")
+                        console.log(activities, activityId, activities[activityId])
+                    }
                 });
             }
         }

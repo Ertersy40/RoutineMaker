@@ -47,40 +47,36 @@
             <span class="close-button">&times;</span>
             <h2 id="notes-dialog-title">Activity Title</h2>
             <p id="notes-dialog-description">Activity Description</p>
-    
-            <!-- Settings Section -->
-            <div id="activity-settings">
-                <!-- <h3>Activity Settings</h3> -->
-                <!-- <button id="settings-toggle-button" class="settings-toggle-button">Settings &#9660;</button> -->
 
-                <!-- Collapsible Settings Section -->
-                <div id="activity-settings" class="collapsible-section open">
-                    <form id="activity-settings-form">
-                        <label for="activity-color-settings">Color:</label>
-                        <input type="color" id="activity-color-settings" name="color" value="#000000">
-        
-                        <label for="activity-day">Day:</label>
-                        <select id="activity-day" name="day">
-                            <option value="">--Select Day--</option>
-                            <option value="Sunday">Sunday</option>
-                            <option value="Monday">Monday</option>
-                            <option value="Tuesday">Tuesday</option>
-                            <option value="Wednesday">Wednesday</option>
-                            <option value="Thursday">Thursday</option>
-                            <option value="Friday">Friday</option>
-                            <option value="Saturday">Saturday</option>
-                        </select>
-        
-                        <label for="activity-start-time">Start Time:</label>
-                        <input type="time" id="activity-start-time" name="start-time" required>
-        
-                        <label for="activity-end-time">End Time:</label>
-                        <input type="time" id="activity-end-time" name="end-time" required>
-        
-                        <button type="submit">Save Changes</button>
-                        <button type="button" id="delete-activity-button">Delete Activity</button>
-                    </form>
-                </div>
+            <button id="settings-toggle-button" class="settings-toggle-button">Settings &#9660;</button>
+
+            <!-- Collapsible Settings Section -->
+            <div id="activity-settings" class="collapsible-section">
+                <form id="activity-settings-form">
+                    <label for="activity-color-settings">Color:</label>
+                    <input type="color" id="activity-color-settings" name="color" value="#000000">
+
+                    <label for="activity-day">Day:</label>
+                    <select id="activity-day" name="day">
+                        <option value="">--Select Day--</option>
+                        <option value="Sunday">Sunday</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                    </select>
+
+                    <label for="activity-start-time">Start Time:</label>
+                    <input type="time" id="activity-start-time" name="start-time" required>
+
+                    <label for="activity-end-time">End Time:</label>
+                    <input type="time" id="activity-end-time" name="end-time" required>
+
+                    <button type="submit">Save Changes</button>
+                    <button type="button" id="delete-activity-button">Delete Activity</button>
+                </form>
             </div>
     
             <h3>To-Do List</h3>
