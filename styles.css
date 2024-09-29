@@ -141,7 +141,10 @@ body {
 }
 
 .current-time-outline {
-    border: 2px solid red;
+    /* TODO: can't click the current time's activity. */
+    z-index: 2;
+    border-radius: 10px;
+    border: 5px solid red;
     box-sizing: border-box;
 }
 
