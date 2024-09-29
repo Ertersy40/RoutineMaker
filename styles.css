@@ -125,6 +125,7 @@ body {
 }
 
 .activity-block {
+    border-radius: 10px;
     position: absolute; /* Absolute positioning */
     left: 0;
     width: 100%;

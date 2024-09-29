@@ -514,8 +514,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (activities[activityId]) {
 
                         let activityBlock = document.createElement('div');
+                        let rgb = hexToRgb(activities[activityId].color)
                         activityBlock.className = 'activity-block';
-                        activityBlock.style.backgroundColor = activities[activityId].color;
+                        activityBlock.style.border = `5px solid ${activities[activityId].color}`
+                        activityBlock.style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.9)`;
                         activityBlock.textContent = activities[activityId].title;
                         
                         // Position the activity block absolutely
@@ -646,5 +648,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
 
 
