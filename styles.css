@@ -140,6 +140,11 @@ body {
     cursor: pointer;
 }
 
+#todo-list {
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
 .current-time-outline {
     /* TODO: can't click the current time's activity. */
     z-index: 2;
